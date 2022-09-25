@@ -1,0 +1,766 @@
+/*color de fondo*/
+/*medidas iconos*/
+/*maps*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+    background-image: linear-gradient(to left bottom, #845ec2, #646cc5, #4875c1, #367cb7, #3880aa, #3d8aa4, #50929c, #679896, #84a597, #a2b19d, #bebdaa, #d5cabd);
+    min-height: 100vh; }
+    body div .container__grid {
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+      grid-template-areas: "header"
+   "main"
+   "footer"; }
+  
+  .bold {
+    font-weight: 900;
+    background-color: rgba(5, 56, 9, 0.185);
+    border-radius: 5px; }
+  
+  header {
+    background-color: rgba(64, 77, 59, 0.473); }
+    header div img {
+      padding-top: 0.5%;
+      padding-left: 0.5%;
+      width: 60px; }
+    header div a {
+      margin-top: 1%;
+      margin-left: 1%;
+      font-family: "Poppins", sans-serif; }
+    header div div select {
+      background-color: rgba(113, 206, 82, 0.089);
+      float: right; }
+    header div .nav-link {
+      display: inline-block;
+      text-decoration: none;
+      width: 100%;
+      cursor: pointer;
+      position: relative; }
+      header div .nav-link::after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: rgba(216, 215, 228, 0.534);
+        border-radius: 4px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.2s ease; }
+      header div .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left; }
+    header .navbar-nav a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90px;
+      margin-left: 0.5%;
+      font-family: "Poppins", sans-serif; }
+  
+  .nav-link {
+    cursor: pointer;
+    position: relative; }
+    .nav-link::after {
+      content: "";
+      width: 100%;
+      height: 10px;
+      background-color: #d80c0c;
+      border-radius: 4px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease; }
+  
+  footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%; }
+  
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: center; }
+    ul li {
+      margin-left: 20px; }
+  
+  .derechos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 5px;
+    margin-top: 2px;
+    font-family: "Poppins", sans-serif; }
+  
+  .principal {
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4%;
+    margin-bottom: 10%; }
+    .principal section, .principal section img {
+      width: 30%;
+      text-align: center;
+      align-content: center;
+      font-size: 1.2rem; }
+      .principal section p {
+        width: 70%; }
+    .principal section, .principal section img {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+      .principal section img {
+        border-radius: 200px;
+        width: 300px; }
+      .principal section a button {
+        width: 100%; }
+  
+  .secundario {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8%; }
+    .secundario .sobremiContenido {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: center; }
+      .secundario .sobremiContenido .presentacionDos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        font-family: "Poppins", sans-serif;
+        margin-right: 10%; }
+        .secundario .sobremiContenido .presentacionDos h1 {
+          background-color: rgba(29, 32, 32, 0.144);
+          border-radius: 80px 20px;
+          font-size: 1.8rem;
+          height: auto;
+          padding-left: 50px;
+          padding-right: 50px;
+          margin-bottom: 10%; }
+        .secundario .sobremiContenido .presentacionDos p {
+          font-size: 1.2rem; }
+      .secundario .sobremiContenido .habilidad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        .secundario .sobremiContenido .habilidad ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center; }
+          .secundario .sobremiContenido .habilidad ul .progress {
+            width: 100%; }
+          .secundario .sobremiContenido .habilidad ul li {
+            display: flex;
+            margin-top: 30px; }
+            .secundario .sobremiContenido .habilidad ul li img {
+              width: 40px;
+              margin-left: 20px; }
+    .secundario .arquitectura {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px; }
+      .secundario .arquitectura h4 {
+        background-color: rgba(29, 32, 32, 0.144);
+        border-radius: 80px 20px;
+        font-size: 1.8rem;
+        height: auto;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-bottom: 0%; }
+      .secundario .arquitectura .planos {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0%; }
+        .secundario .arquitectura .planos .detalle {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around; }
+          .secundario .arquitectura .planos .detalle .velero {
+            display: inline-block;
+            box-shadow: 0px 3px 5px #0f0f0f;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            margin-top: 50px; }
+            .secundario .arquitectura .planos .detalle .velero::before {
+              content: "Constructivo Velero";
+              bottom: 0;
+              top: 0;
+              left: 0;
+              right: 0;
+              background-color: #858186ce;
+              transform: translate(100%);
+              transform: scale(0);
+              position: absolute;
+              transform: scaleX(0);
+              transition: transform .4s;
+              color: #070000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 1.5rem; }
+            .secundario .arquitectura .planos .detalle .velero:hover::before {
+              transform: scaleY(1); }
+          .secundario .arquitectura .planos .detalle .timon {
+            display: inline-block;
+            position: relative;
+            box-shadow: 0px 3px 5px #0f0f0f;
+            cursor: pointer;
+            overflow: hidden;
+            margin-top: 50px; }
+            .secundario .arquitectura .planos .detalle .timon::before {
+              content: "Plano Timon";
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              background-color: #858186ce;
+              transform: translate(100%);
+              transform: scale(0);
+              transform: scaleX(0);
+              transition: transform .4s;
+              color: #070000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 1.5rem; }
+            .secundario .arquitectura .planos .detalle .timon:hover::before {
+              transform: scaleY(1); }
+        .secundario .arquitectura .planos .refuerzos {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          margin-top: 0%; }
+          .secundario .arquitectura .planos .refuerzos .quillote {
+            display: inline-block;
+            position: relative;
+            box-shadow: 0px 3px 5px #0f0f0f;
+            cursor: pointer;
+            overflow: hidden;
+            margin-top: 50px; }
+            .secundario .arquitectura .planos .refuerzos .quillote::before {
+              content: "Plano Quillote";
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              background-color: #858186ce;
+              transform: translate(100%);
+              transform: scale(0);
+              transform: scaleX(0);
+              transition: transform .4s;
+              color: #070000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 1.5rem; }
+            .secundario .arquitectura .planos .refuerzos .quillote:hover::before {
+              transform: scaleY(1); }
+          .secundario .arquitectura .planos .refuerzos .varengas {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0px 3px 5px #0f0f0f;
+            overflow: hidden;
+            margin-top: 50px; }
+            .secundario .arquitectura .planos .refuerzos .varengas::before {
+              content: "Plano Vargengas";
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              background-color: #858186ce;
+              transform: translate(100%);
+              transform: scale(0);
+              transform: scaleX(0);
+              transition: transform .4s;
+              color: #070000;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 1.5rem; }
+            .secundario .arquitectura .planos .refuerzos .varengas:hover::before {
+              transform: scaleY(1); }
+      .secundario .arquitectura section, .secundario .arquitectura .principal section img, .principal section .secundario .arquitectura img {
+        margin-top: 40px; }
+  
+  .experiencia {
+    grid-area: main;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto; }
+    .experiencia .terciario {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15%; }
+      .experiencia .terciario h1 {
+        background-color: rgba(29, 32, 32, 0.144);
+        border-radius: 80px 20px;
+        font-size: 1.8rem;
+        height: auto;
+        padding-left: 50px;
+        padding-right: 50px;
+        text-align: center; }
+      .experiencia .terciario .presentacionTres {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 10%;
+        width: 500px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.2rem; }
+    .experiencia .encuesta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 500px; }
+      .experiencia .encuesta h2 {
+        font-size: 1.4rem; }
+      .experiencia .encuesta .trabajos {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center; }
+        .experiencia .encuesta .trabajos input {
+          width: 50px; }
+        .experiencia .encuesta .trabajos img {
+          border-radius: 100px;
+          margin-left: 30px;
+          margin-top: 20px; }
+      .experiencia .encuesta .envio {
+        margin-top: 30px;
+        width: 40%;
+        padding: 0.3rem 0.3rem;
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 80%;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: none;
+        border-radius: 10px; }
+        .experiencia .encuesta .envio:hover {
+          background-color: #b9bff577; }
+      .experiencia .encuesta .mail {
+        margin-top: 40px;
+        width: 220px;
+        border: 2px solid rgba(0, 0, 0, 0.184);
+        outline: none;
+        background-color: rgba(253, 247, 247, 0.658);
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease-in-out; }
+        .experiencia .encuesta .mail:hover {
+          background-color: #b9bff59f; }
+        .experiencia .encuesta .mail:focus {
+          border: 2px solid #b9bff577;
+          background-color: rgba(7, 7, 7, 0.199); }
+  
+  .clientes {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%; }
+    .clientes h1 {
+      background-color: rgba(29, 32, 32, 0.144);
+      border-radius: 80px 20px;
+      font-size: 1.8rem;
+      height: auto;
+      padding-left: 50px;
+      padding-right: 50px;
+      font-family: "Poppins", sans-serif;
+      margin-bottom: 50px; }
+  
+  .box__fixed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    bottom: 2%;
+    right: 2%;
+    background-color: #4dc247a9;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px; }
+    .box__fixed img {
+      width: 40px; }
+  
+  .contactame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%; }
+    .contactame h1 {
+      background-color: rgba(29, 32, 32, 0.144);
+      border-radius: 80px 20px;
+      font-size: 1.8rem;
+      height: auto;
+      padding-left: 50px;
+      padding-right: 50px; }
+    .contactame div .formulario {
+      position: relative;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 100px; }
+    .contactame div .contact-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+      max-width: 850px;
+      border-radius: 30px; }
+    .contactame div .left {
+      height: 100%;
+      background: url(../images/logolp.png) no-repeat center;
+      background-size: cover;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px; }
+    .contactame div .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 40px; }
+    .contactame div .field {
+      width: 220px;
+      border: 2px solid rgba(0, 0, 0, 0.184);
+      outline: none;
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-bottom: 22px;
+      transition: all 0.3s ease-in-out; }
+    .contactame div .field:hover {
+      background-color: #b9bff59f; }
+    .contactame div .btn2 {
+      width: 40%;
+      padding: 0.3rem 0.3rem;
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 80%;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      border: none;
+      border-radius: 10px; }
+    .contactame div .btn2:hover {
+      background-color: #b9bff577; }
+    .contactame div .field:focus {
+      border: 2px solid #b9bff577;
+      background-color: rgba(7, 7, 7, 0.199); }
+    .contactame section, .contactame .principal section img, .principal section .contactame img {
+      margin-top: 5%; }
+      .contactame section h2, .principal section .contactame img h2 {
+        width: 50%;
+        background-color: rgba(29, 32, 32, 0.144);
+        border-radius: 80px 20px;
+        font-size: 1.4rem;
+        height: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto; }
+      .contactame section .mapa, .principal section .contactame img .mapa {
+        border-radius: 50px;
+        margin-top: 20px; }
+  
+  @media only screen and (min-width: 0px) and (max-width: 600px) {
+    .encabezado {
+      display: flex;
+      flex-wrap: wrap; }
+    .principal {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 80px; }
+      .principal section, .principal section img {
+        width: 90%;
+        margin-bottom: 20px; }
+    header {
+      background-color: rgba(64, 77, 59, 0.473); }
+      header div img {
+        width: 45px; }
+      header div .navbar-brand {
+        font-size: 110%;
+        margin-right: 20%; }
+    .secundario .sobremiContenido {
+      flex-direction: column; }
+      .secundario .sobremiContenido .presentacionDos {
+        width: 80%;
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px; }
+        .secundario .sobremiContenido .presentacionDos h1 {
+          padding-top: 2%;
+          font-size: 1.5rem; }
+      .secundario .sobremiContenido .habilidad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        .secundario .sobremiContenido .habilidad ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center; }
+          .secundario .sobremiContenido .habilidad ul .progress {
+            width: 100%; }
+          .secundario .sobremiContenido .habilidad ul li {
+            display: flex;
+            margin-top: 30px; }
+            .secundario .sobremiContenido .habilidad ul li img {
+              width: 40px;
+              margin-left: 20px; }
+    .experiencia {
+      flex-direction: column; }
+      .experiencia .terciario {
+        margin-left: auto;
+        margin-right: auto; }
+        .experiencia .terciario h1 {
+          font-size: 1.6rem; }
+        .experiencia .terciario .presentacionTres {
+          width: 80%;
+          font-size: 1rem; }
+      .experiencia .encuesta {
+        width: 50%;
+        margin-top: 50px; }
+        .experiencia .encuesta h2 {
+          font-size: 1.2rem; }
+        .experiencia .encuesta .trabajos {
+          margin-top: 10px; }
+          .experiencia .encuesta .trabajos img {
+            margin-top: 10px;
+            width: 200px; }
+    .clientes {
+      grid-area: main;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 10%;
+      margin-bottom: 40%; }
+      .clientes div h1 {
+        padding-top: 4%;
+        font-size: 1.5rem;
+        margin-bottom: 150px; }
+      .clientes img {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%; }
+    .contactame h1 {
+      font-size: 1.5rem;
+      margin-bottom: 50px; }
+    .contactame .formulario {
+      width: 320px; }
+      .contactame .formulario .contact-box {
+        padding-left: 10%;
+        padding-right: 10%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px; }
+    .contactame .left {
+      display: none; }
+    .arquitectura .planos {
+      display: flex;
+      flex-direction: row;
+      margin-top: 30px; }
+      .arquitectura .planos .detalle {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%; }
+        .arquitectura .planos .detalle .timon {
+          margin-top: 30px; }
+      .arquitectura .planos .refuerzos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%; }
+        .arquitectura .planos .refuerzos .quillote {
+          background-image: url(../images/quillote.png); }
+        .arquitectura .planos .refuerzos .varengas {
+          background-image: url(../images/quillote.png);
+          margin-top: 30px; } }
+  
+  @media only screen and (min-width: 600px) and (max-width: 1024px) {
+    .encabezado {
+      display: flex;
+      flex-wrap: wrap; }
+    .principal {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 150px; }
+      .principal section, .principal section img {
+        width: 90%; }
+    header {
+      background-color: rgba(64, 77, 59, 0.473); }
+      header div bar-brand {
+        font-size: 110%;
+        margin-right: 10%; }
+    .secundario .sobremiContenido {
+      flex-direction: column; }
+      .secundario .sobremiContenido .presentacionDos {
+        width: 80%;
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto; }
+        .secundario .sobremiContenido .presentacionDos h1 {
+          font-size: 1.5rem; }
+      .secundario .sobremiContenido .habilidad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px; }
+        .secundario .sobremiContenido .habilidad ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center; }
+          .secundario .sobremiContenido .habilidad ul .progress {
+            width: 100%; }
+          .secundario .sobremiContenido .habilidad ul li {
+            display: flex;
+            margin-top: 30px; }
+            .secundario .sobremiContenido .habilidad ul li img {
+              width: 40px;
+              margin-left: 20px; }
+    .experiencia {
+      flex-direction: column; }
+      .experiencia .terciario {
+        margin-left: auto;
+        margin-right: auto; }
+        .experiencia .terciario h1 {
+          font-size: 1.5rem; }
+        .experiencia .terciario .presentacionTres {
+          width: 80%;
+          font-size: 1rem; }
+      .experiencia .encuesta {
+        margin-top: 80px;
+        width: 50%; }
+        .experiencia .encuesta h2 {
+          font-size: 1.2rem; }
+        .experiencia .encuesta .trabajos {
+          margin-top: 10px; }
+          .experiencia .encuesta .trabajos img {
+            margin-top: 10px;
+            width: 200px; }
+    .clientes {
+      grid-area: main;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 5%;
+      margin-bottom: 12%; }
+      .clientes h1 {
+        font-size: 1.5rem;
+        margin-bottom: 50px; }
+      .clientes img {
+        margin-left: auto;
+        margin-right: auto; }
+    .contactame h1 {
+      font-size: 1.5rem;
+      margin-bottom: 50px; }
+    .contactame .formulario {
+      width: 320px; }
+      .contactame .formulario .contact-box {
+        padding-left: 10%;
+        padding-right: 10%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px; }
+    .contactame .left {
+      display: none; }
+    .arquitectura .planos {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      margin-top: 30px; }
+      .arquitectura .planos .detalle {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%; }
+        .arquitectura .planos .detalle .velero {
+          background-image: url(../images/tiendanube.jpg); }
+        .arquitectura .planos .detalle .timon {
+          background-image: url(../images/quillote.png);
+          margin-top: 30px; }
+      .arquitectura .planos .refuerzos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%; }
+        .arquitectura .planos .refuerzos .quillote {
+          background-image: url(../images/quillote.png); }
+        .arquitectura .planos .refuerzos .varengas {
+          background-image: url(../images/quillote.png);
+          margin-top: 30px; } }
+  
