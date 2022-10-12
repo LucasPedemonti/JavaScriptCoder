@@ -4,165 +4,209 @@ console.log("Bienvenid@ "+ nombreUser);
 let mailUser= prompt("Ingresa tu mail", "@gmail.com");
 console.log("mail: "+mailUser);
 
-let servicio1;
-let confirServ;
-function elegirServicio() {
-  servicio1 = parseInt(prompt("¿Que servicio te interesa? \n1-Desarrollo Web  \n2-Arquitectura naval"));
-  while (servicio1 > 2 || isNaN(servicio1) || servicio1 == 0) { 
-    servicio1 = parseInt (prompt("El Servicio que elegiste no existe.\nPor favor volvé a intentarlo: \n1-Desarrollo Web  \n2-Arquitectura naval"));
+//Array de objetos de los Servicios
+const servicios = [
+  {
+    id: 1,
+    nombre: "Página Web",
+    precio: 20000,
+  },
+  {
+    id: 2,
+    nombre: "Portfolio",
+    precio: 25000,
+  },
+  {
+    id: 3,
+    nombre: "Ecommerse",
+    precio: 40000,
+  },
+  {
+    id: 4,
+    nombre: "Planos Autocad",
+    precio: 25000,
+  },
+  {
+    id: 5,
+    nombre: "Render 3D",
+    precio: 30000,
+  },
+];
+
+//Variables globales
+let comenzar = true;
+const textoConfirmar = "\nSí (Aceptar)\nNo (Cancelar)";
+let confirmarSalir = false;
+let confirmarPedido = false;
+let numDni;
+let mayorEdad;
+let eleccion; //variable dinámica - almacena la última elección del cliente sobre el menú
+let pedido = []; //Array para almacenar pedido
+let totalPedido = 0;
+
+//Funciones
+
+//función opción comenzar o salir
+function comenzarApp() {
+  comenzar = confirm("¡Hola!\n¿Queres solicitar un servicio?" + textoConfirmar);
+  return comenzar;
+}
+
+//función genérica para confirmar si el cliente desea salir en distintas instancias del proceso
+function salida(volverA) {
+  confirmarSalir = confirm("¿Querés salir de la App?" + textoConfirmar);
+  if (confirmarSalir) {
+    alert("Saludos \nLucas Pedemonti - Desarrollador web");
+  } else {
+    volverA();
+  }
+  return confirmarSalir;
+}
+
+//función ingresar numero de mesa (Sólo hay numeros de mesas del 1 al 20 inclusive)
+function dni() {
+  numDni = parseInt(prompt("Por favor indicá el número de tu DNI:"));
+  while (numDni > 100000000 || isNaN(numDni) || numDni === 0) {
+    numDni = parseInt(
+      prompt(
+        "El número ingresado es incorrecto.\nPor favor volvé a indicar el número de tu DNI:"
+      )
+    );
   }
 }
 
-elegirServicio()
-console.log(servicio1);
-//Confirmar
-function confirmarServicio() {
-  confirServ = prompt("Queres averiguar sobre opcion "+ servicio1+" \n1-Para Confirmar\n2-Para Volver a corregir");
-  while (confirServ != 1) {
-    switch (confirServ) {
-      case "2":
-        elegirServicio();
-      default:
-        confirServ = prompt("Ingresaste un valor no valido \n1-Para Confirmar\n2-Para volver a elegir un servicio");
-    }
+//Confirmar numero de Mesa
+function confirmarDni() {
+  let confirDni = confirm(
+    `¿Este es tu numero de DNI ${numDni}?\n${textoConfirmar}`
+  );
+  while (confirDni == false) {
+    dni();
+    confirDni = confirm(
+      `¿Tu numero de DNI es ${numDni}?\n${textoConfirmar}`
+    );
   }
-}
-confirmarServicio()
-if (servicio1=="1"){
-function opciones() {
-  producto = prompt("1-Pagina Web \n2-Portfolio\n3-Tienda Ecommerse\n(N) Para cancelar \n(Y) Para enviar pedido");
-  return producto;
-}
-let totalPresupuesto=0;
-function opPedido() {
-  while (
-    producto != "N" &&
-    producto != "n" &&
-    producto != "Y" &&
-    producto != "y" ) {
-    switch (producto) {
-      case "1":
-        alert("Seleccionaste Pagina Web valor $25000");
-        totalPresupuesto= totalPresupuesto+25000;
-        break;
-      case "2":
-        alert("Seleccionaste Portfolio valor $20000");
-        totalPresupuesto= totalPresupuesto+20000;
-        break;
-      case "3":
-        alert("Seleccionaste Tienda Ecommerce valor $40000")
-        totalPresupuesto= totalPresupuesto+4000;
-        break;
-      default:
-        alert("Esta opcion no es valida")
-    }
-    console.log(totalPresupuesto);
-    opciones();
-  }
- return totalPresupuesto;
-}
-function terminarPresupuesto() {
-  if ((producto == "y" || producto == "Y") && totalPresupuesto != 0) {
-    alert("Cotizacion de servicios enviado con éxito el total es $"+totalPresupuesto+ "\nA la brevedad me estare comunidando con usted");
-  } else if ((producto == "y" || producto == "Y") && totalPresupuesto == 0) {
-    alert("No cargaste ningún servicio");
-  }
-  if (producto == "n" || producto == "N") {
-    alert("Cancelaste el presupuesto");
-    totalPresupuesto = 0;
-  }
-  return totalPresupuesto;
-}
-function enviarPresupuesto() {
-  opciones();
-  opPedido();
-  terminarPresupuesto();
 }
 
-enviarPresupuesto();
+//Validar Edad - Se pide porque hay productos que son sólo para mayores de edad
+function validarEdad() {
+  mayorEdad = confirm("¿Tenés 18 años o más?" + textoConfirmar);
+  if (mayorEdad) {
+    alert(
+      "Indicaste que sos MAYOR de edad.\nPara confirmar selecciona Aceptar"
+    );
+  } else {
+    alert(
+      "Indicaste que sos MENOR de edad.\nPara confirmar selecciona Aceptar"
+    );
+  }
+  return mayorEdad;
+}
 
-function salirApp() {
-  let salir;
-  do {
-    salir = prompt("(1) Para nuevo presupuesto\n(2) Para Salir");
-    if (salir == "1") {
-      totalPresupuesto = 0;
-      enviarPresupuesto();
-      salirApp();
-    } else if (salir == "2") {
-      alert("Saludos \nLucas Pedemonti - Desarrollador web");
+//Menú por prompt obtiene los datos del array de objetos "menu"
+function opcionesDeServicio() {
+  let textoServicio = "Ingresá el N° de Servicio que te interesa:\n\n";
+  for (producto of servicios) {
+    textoServicio += `${producto.id} - ${producto.nombre} - $ ${producto.precio}\n`;
+  }
+  eleccion = prompt(textoServicio);
+  return eleccion;
+}
+
+//Verifica que la elección de cliente existe y retorna el producto completo
+function buscarServicio() {
+  const productoCliente = eleccion;
+  if (eleccion != null) {
+    const productoSeleccionado = servicios.filter(
+      (producto) => producto.id == productoCliente
+    );
+    return productoSeleccionado;
+  }
+}
+
+//Agrega los productoSeleccionados al pedido
+function agregarAlPedido() {
+  const agregar = buscarServicio();
+  if (eleccion == null) {
+    salida(hacerPedido);
+  } else if (agregar.length > 0) {
+    if (mayorEdad === false && agregar[0].mayorEdad === true) {
+      alert(
+        `Sos menor de edad, no podés obtener el servicio.`
+      );
+      if (totalPedido > 0) {
+        enviarPedido();
+      }
     } else {
-      alert("Opción incorrecta!");
+      pedido.push(agregar);
+      alert(
+        `El producto, ${agregar[0].nombre} fue cargado con éxito a tu pedido`
+      );
+      totalPedido = totalPedido + agregar[0].precio;
+      enviarPedido();
     }
-  } while (salir != "2" && salir != "1");
-  return salir;
+  } else {
+    alert("El número de producto ingresado no existe");
+    if (totalPedido > 0) {
+      enviarPedido();
+    }
+  }
+  return totalPedido;
 }
-salirApp();
-}else{
-  function opciones2() {
-    producto = prompt("1-Render \n2-Plano 2D\n3-Calculo del eje propulsor \n(N) Para cancelar \n(Y) Para enviar pedido");
-    return producto;
+
+//Función que retorna booleano de acuerdo si el cliente quiere finalizar o seguir con el pedido
+//Muestra al cliente el detalle de los productos y total
+function enviarPedido() {
+  let textoPedido =
+    "¿Terminaste tu pedido?\nSí, enviar. (Aceptar)\nNo, no terminé mi pedido (Cancelar)\n\nTu pedido hasta ahora:\n";
+  for (producto of pedido) {
+    let i = 0;
+    textoPedido += `${producto[i].nombre} - $ ${producto[i].precio}\n`;
+    i++;
   }
-  let totalPresupuesto=0;
-  function opPedido2() {
-    while (
-      producto != "N" &&
-      producto != "n" &&
-      producto != "Y" &&
-      producto != "y" ) {
-      switch (producto) {
-        case "1":
-          alert("Seleccionaste Render valor $70000");
-          totalPresupuesto= totalPresupuesto+70000;
-          break;
-        case "2":
-          alert("Seleccionaste Plano 2D valor $60000");
-          totalPresupuesto= totalPresupuesto+60000;
-          break;
-        case "3":
-          alert("Seleccionaste Calculo del eje propulsor valor $30000")
-          totalPresupuesto= totalPresupuesto+30000;
-          break;
-        default:
-          alert("Esta opcion no es valida")
-      }
-      opciones2();
-    }
-   return totalPresupuesto;
-  }
-  function terminarPresupuesto2() {
-    if ((producto == "y" || producto == "Y") && totalPresupuesto != 0) {
-      alert("Cotizacion de servicios enviado con éxito el total es $"+totalPresupuesto+ "\nA la brevedad me estare comunidando con usted");
-    } else if ((producto == "y" || producto == "Y") && totalPresupuesto == 0) {
-      alert("No cargaste ningún Servicio");
-    }
-    if (producto == "n" || producto == "N") {
-      alert("Cancelaste el presupuesto");
-      totalPresupuesto = 0;
-    }
-    return totalPresupuesto;
-  }
-  function enviarPresupuesto2() {
-    opciones2();
-    opPedido2();
-    terminarPresupuesto2();
-  }
-  enviarPresupuesto2();
-  function salirApp2() {
-    let salir;
-    do {
-      salir = prompt("(1) Para nuevo presupuesto\n(2) Para Salir");
-      if (salir == "1") {
-        totalPresupuesto = 0;
-        enviarPresupuesto2();
-        salirApp2();
-      } else if (salir == "2") {
-        alert("Saludos \nLucas Pedemonti - Desarrollador web");
-      } else {
-        alert("Opción incorrecta!");
-      }
-    } while (salir != "2" && salir != "1");
-    return salir;
-  }
-  salirApp2();
+  confirmarPedido = confirm(`${textoPedido}\nTotal $ ${totalPedido}`);
+  return confirmarPedido;
 }
+
+//flujo para seguir agregando productos
+function hacerPedido() {
+  opcionesDeServicio();
+  buscarServicio();
+  agregarAlPedido();
+}
+
+//Función para concluir pedido y opción de empezar uno nuevo o salir de la App
+function terminarPedido() {
+  let textoTerminar = confirm(
+    `El pedido se realizó con exito!\nEl total es $ ${totalPedido}\nEn breve me pondré en contacto.\n\n¿Querés realizar otro pedido?\n${textoConfirmar}`
+  );
+  if (textoTerminar) {
+    totalPedido = 0;
+    pedido = [];
+    confirmarPedido = false;
+    secuenciaApp();
+  } else {
+    alert("Saludos \nLucas Pedemonti - Desarrollador web");
+  }
+}
+
+//Flujo de procesos para que corra la App
+function secuenciaApp() {
+  comenzarApp();
+  if (comenzar === true) {
+    dni();
+    confirmarDni();
+    validarEdad();
+    while (confirmarSalir === false && confirmarPedido === false) {
+      hacerPedido();
+    }
+  } else {
+    salida(secuenciaApp);
+  }
+  if (confirmarPedido === true) {
+    terminarPedido();
+  }
+}
+
+/* LLAMADO A FUNCION */
+secuenciaApp();
