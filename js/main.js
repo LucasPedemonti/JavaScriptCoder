@@ -1,212 +1,145 @@
-let nombreUser= prompt("Ingresa tu nombre");
-console.log("Bienvenid@ "+ nombreUser);
-
-let mailUser= prompt("Ingresa tu mail", "@gmail.com");
-console.log("mail: "+mailUser);
-
-//Array de objetos de los Servicios
-const servicios = [
-  {
-    id: 1,
-    nombre: "Página Web",
-    precio: 20000,
-  },
-  {
-    id: 2,
-    nombre: "Portfolio",
-    precio: 25000,
-  },
-  {
-    id: 3,
-    nombre: "Ecommerse",
-    precio: 40000,
-  },
-  {
-    id: 4,
-    nombre: "Planos Autocad",
-    precio: 25000,
-  },
-  {
-    id: 5,
-    nombre: "Render 3D",
-    precio: 30000,
-  },
-];
-
-//Variables globales
-let comenzar = true;
-const textoConfirmar = "\nSí (Aceptar)\nNo (Cancelar)";
-let confirmarSalir = false;
-let confirmarPedido = false;
-let numDni;
-let mayorEdad;
-let eleccion; //variable dinámica - almacena la última elección del cliente sobre el menú
-let pedido = []; //Array para almacenar pedido
-let totalPedido = 0;
-
-//Funciones
-
-//función opción comenzar o salir
-function comenzarApp() {
-  comenzar = confirm("¡Hola!\n¿Queres solicitar un servicio?" + textoConfirmar);
-  return comenzar;
-}
-
-//función genérica para confirmar si el cliente desea salir en distintas instancias del proceso
-function salida(volverA) {
-  confirmarSalir = confirm("¿Querés salir de la App?" + textoConfirmar);
-  if (confirmarSalir) {
-    alert("Saludos \nLucas Pedemonti - Desarrollador web");
-  } else {
-    volverA();
-  }
-  return confirmarSalir;
-}
-
-//función ingresar numero de mesa (Sólo hay numeros de mesas del 1 al 20 inclusive)
-function dni() {
-  numDni = parseInt(prompt("Por favor indicá el número de tu DNI:"));
-  while (numDni > 100000000 || isNaN(numDni) || numDni === 0) {
-    numDni = parseInt(
-      prompt(
-        "El número ingresado es incorrecto.\nPor favor volvé a indicar el número de tu DNI:"
-      )
-    );
+class Servicio {
+  constructor(id, nombre, precio, img) {
+      this.id = id;
+      this.nombre = nombre; 
+      this.precio = precio;
+      this.img = img;
+      this.cantidad = 1; 
   }
 }
 
-//Confirmar numero de Mesa
-function confirmarDni() {
-  let confirDni = confirm(
-    `¿Este es tu numero de DNI ${numDni}?\n${textoConfirmar}`
-  );
-  while (confirDni == false) {
-    dni();
-    confirDni = confirm(
-      `¿Tu numero de DNI es ${numDni}?\n${textoConfirmar}`
-    );
-  }
+const paginasWeb = new Servicio(1, "Paginas Web", 20000, "../images/website.jpg");
+const portfolio = new Servicio(2, "Portfolio", 25000, "../images/portfolio.jpg");
+const tiendaEcommerse = new Servicio(3, "Tienda Ecommerse", 40000, "../images//tiendanube.jpg");
+const autoCad = new Servicio(4, "AutoCad Timon", 25000, "../images/timon.png");
+const render = new Servicio(5, "Render 3D", 30000, "../images/render.jpg");
+const calculos = new Servicio(6, "Calculos", 45000, "../images/velero.png");
+
+
+
+const servicios = [paginasWeb, portfolio, tiendaEcommerse, autoCad, render, calculos];
+
+//Creamos el array carrito 
+
+let carrito = [];
+
+if(localStorage.getItem("carrito")) {
+  carrito = JSON.parse(localStorage.getItem("carrito"));
 }
 
-//Validar Edad - Se pide porque hay productos que son sólo para mayores de edad
-function validarEdad() {
-  mayorEdad = confirm("¿Tenés 18 años o más?" + textoConfirmar);
-  if (mayorEdad) {
-    alert(
-      "Indicaste que sos MAYOR de edad.\nPara confirmar selecciona Aceptar"
-    );
-  } else {
-    alert(
-      "Indicaste que sos MENOR de edad.\nPara confirmar selecciona Aceptar"
-    );
-  }
-  return mayorEdad;
+
+const contenedorServicios = document.getElementById("contenedorServicios");
+
+
+const mostrarServicios = () => {
+  servicios.forEach((servicio) => {
+      const card = document.createElement("div");
+      card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
+      card.innerHTML = `
+          <div class="card">
+              <img src="${servicio.img}" class="card-img-top imgServicios" alt="${servicio.nombre}">
+              <div class="card-body">
+              <h5 class="card-title"> ${servicio.nombre} </h5>
+              <p class="card-text"> ${servicio.precio} </p>
+              <button class="btn colorBoton" id="boton${servicio.id}"> Agregar al Carrito </button>
+              </div>
+          </div>
+      `
+      contenedorServicios.appendChild(card);
+
+      const boton = document.getElementById(`boton${servicio.id}`);
+      boton.addEventListener("click", () => {
+          agregarAlCarrito(servicio.id)
+      })
+  })
 }
 
-//Menú por prompt obtiene los datos del array de objetos "menu"
-function opcionesDeServicio() {
-  let textoServicio = "Ingresá el N° de Servicio que te interesa:\n\n";
-  for (producto of servicios) {
-    textoServicio += `${producto.id} - ${producto.nombre} - $ ${producto.precio}\n`;
+const agregarAlCarrito = (id) => {
+  const servicio = servicios.find((servicio) => servicio.id === id);
+  const servicioEnCarrito = carrito.find((servicio) => servicio.id === id);
+  if(servicioEnCarrito){
+    servicioEnCarrito.cantidad++;
+  }else {
+      carrito.push(servicio);
+      localStorage.setItem("carrito",JSON.stringify(carrito));
   }
-  eleccion = prompt(textoServicio);
-  return eleccion;
+  calcularTotal();
 }
 
-//Verifica que la elección de cliente existe y retorna el producto completo
-function buscarServicio() {
-  const productoCliente = eleccion;
-  if (eleccion != null) {
-    const productoSeleccionado = servicios.filter(
-      (producto) => producto.id == productoCliente
-    );
-    return productoSeleccionado;
-  }
+mostrarServicios();
+
+const contenedorCarrito = document.getElementById("contenedorCarrito");
+
+const verCarrito = document.getElementById("verCarrito");
+
+verCarrito.addEventListener("click", () => {
+  mostrarCarrito();
+});
+
+const mostrarCarrito = () => {
+  contenedorCarrito.innerHTML="";
+  carrito.forEach((servicio) => {
+      const card = document.createElement("div");
+      card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
+      card.innerHTML = `
+          <div class="card">
+              <img src="${servicio.img}" class="card-img-top imgServicios" alt="${servicio.nombre}">
+              <div class="card-body">
+              <h5 class="card-title"> ${servicio.nombre} </h5>
+              <p class="card-text"> ${servicio.precio} </p>
+              <p class="card-text"> ${servicio.cantidad} </p>
+              <button class="btn colorBoton" id="eliminar${servicio.id}"> Eliminar Servicio </button>
+              </div>
+          </div>
+      `
+      contenedorCarrito.appendChild(card);
+
+      //Eliminar productos del carrito: 
+      const boton = document.getElementById(`eliminar${servicio.id}`);
+      boton.addEventListener("click", () => {
+          eliminarDelCarrito(servicio.id);
+      })
+  })
+  calcularTotal();
 }
 
-//Agrega los productoSeleccionados al pedido
-function agregarAlPedido() {
-  const agregar = buscarServicio();
-  if (eleccion == null) {
-    salida(hacerPedido);
-  } else if (agregar.length > 0) {
-    if (mayorEdad === false && agregar[0].mayorEdad === true) {
-      alert(
-        `Sos menor de edad, no podés obtener el servicio.`
-      );
-      if (totalPedido > 0) {
-        enviarPedido();
-      }
-    } else {
-      pedido.push(agregar);
-      alert(
-        `El producto, ${agregar[0].nombre} fue cargado con éxito a tu pedido`
-      );
-      totalPedido = totalPedido + agregar[0].precio;
-      enviarPedido();
-    }
-  } else {
-    alert("El número de producto ingresado no existe");
-    if (totalPedido > 0) {
-      enviarPedido();
-    }
-  }
-  return totalPedido;
+const eliminarDelCarrito = (id) => {
+  const servicio = carrito.find((servicio) => servicio.id === id);
+  const indice = carrito.indexOf(servicio);
+  carrito.splice(indice, 1);
+  mostrarCarrito();
+
+  //LocalStorage:
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-//Función que retorna booleano de acuerdo si el cliente quiere finalizar o seguir con el pedido
-//Muestra al cliente el detalle de los productos y total
-function enviarPedido() {
-  let textoPedido =
-    "¿Terminaste tu pedido?\nSí, enviar. (Aceptar)\nNo, no terminé mi pedido (Cancelar)\n\nTu pedido hasta ahora:\n";
-  for (producto of pedido) {
-    let i = 0;
-    textoPedido += `${producto[i].nombre} - $ ${producto[i].precio}\n`;
-    i++;
-  }
-  confirmarPedido = confirm(`${textoPedido}\nTotal $ ${totalPedido}`);
-  return confirmarPedido;
+const vaciarCarrito = document.getElementById("vaciarCarrito");
+
+vaciarCarrito.addEventListener("click", () => {
+  eliminarTodoElCarrito();
+})
+
+let boton=document.getElementById("finalizarCompra")
+boton.addEventListener("click", respuestaClick)
+function respuestaClick(){
+  alert("Su compra a sido realizada con exito!!!!");
 }
 
-//flujo para seguir agregando productos
-function hacerPedido() {
-  opcionesDeServicio();
-  buscarServicio();
-  agregarAlPedido();
+const eliminarTodoElCarrito = () => {
+  carrito = [];
+  mostrarCarrito();
+
+  //LocalStorage. 
+  localStorage.clear();
 }
 
-//Función para concluir pedido y opción de empezar uno nuevo o salir de la App
-function terminarPedido() {
-  let textoTerminar = confirm(
-    `El pedido se realizó con exito!\nEl total es $ ${totalPedido}\nEn breve me pondré en contacto.\n\n¿Querés realizar otro pedido?\n${textoConfirmar}`
-  );
-  if (textoTerminar) {
-    totalPedido = 0;
-    pedido = [];
-    confirmarPedido = false;
-    secuenciaApp();
-  } else {
-    alert("Saludos \nLucas Pedemonti - Desarrollador web");
-  }
-}
 
-//Flujo de procesos para que corra la App
-function secuenciaApp() {
-  comenzarApp();
-  if (comenzar === true) {
-    dni();
-    confirmarDni();
-    validarEdad();
-    while (confirmarSalir === false && confirmarPedido === false) {
-      hacerPedido();
-    }
-  } else {
-    salida(secuenciaApp);
-  }
-  if (confirmarPedido === true) {
-    terminarPedido();
-  }
-}
+const total = document.getElementById("total");
 
-/* LLAMADO A FUNCION */
-secuenciaApp();
+const calcularTotal = () => {
+  let totalCompra = 0; 
+  carrito.forEach((servicio) => {
+      totalCompra += servicio.precio * servicio.cantidad;
+  })
+  total.innerHTML = ` $${totalCompra}`;
+}
