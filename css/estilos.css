@@ -507,7 +507,35 @@
       .contactame section .mapa, .principal section .contactame img .mapa {
         border-radius: 50px;
         margin-top: 20px; }
-  
+  .imgProductos{
+          width: 150px;
+          height: 200px;
+          object-fit: contain;
+          margin-top: 1rem;
+  }        
+  .card{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+  }
+  .colorBoton{
+    width: 100%;
+    padding: 0.3rem 0.3rem;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 80%;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 10px;
+  }
+  .colorBoton:hover{
+    background-color: #367cb7;
+  }
+  .colorBoton:focus {
+    border: 2px solid #b9bff577;
+    background-color: rgba(7, 7, 7, 0.199); }
+        
   @media only screen and (min-width: 0px) and (max-width: 600px) {
     .encabezado {
       display: flex;
